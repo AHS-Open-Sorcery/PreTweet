@@ -55,7 +55,7 @@ def get_user_posts(user_id):
 
 def add_user_post(user_id, post):
 	timestamp = dt.datetime.now()
-	query(access_posts(), "INSERT INTO User_Posts (userid, post, timestamp, resolved) VALUES (?, ?, ?, ?)", (user_id, post, timestamp.strftime('%m-%d-%Y %H:%M:%S'), 0))
+	query(access_posts(), "INSERT INTO User_Posts (userid, post, timestamp, resolved, needs_review) VALUES (?, ?, ?, ?, 0)", (user_id, post, timestamp.strftime('%m-%d-%Y %H:%M:%S'), 0))
 	return
 
 
@@ -104,7 +104,7 @@ def modify_post(post_id, new_post):
 # ACCOUNT DATA
 
 def set_email(user_id, email):
-	query(access_users(), "UPDATE user SET email=? WHERE id=?", (email, user_id))
+	query(access_accounts(), "UPDATE user SET email=? WHERE id=?", (email, user_id))
 	return
 
 
