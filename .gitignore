@@ -154,3 +154,4 @@ gen
 
 # Temporary Files
 *~
+!/login/config.py

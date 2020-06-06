@@ -31,7 +31,7 @@ WAITING_PERIOD = timedelta(seconds=1)
 def access_posts():
     global posts_db
     if posts_db is None:
-        posts_db = establish_connection("persistence.sqlite")
+        posts_db = establish_connection("posts.db")
 
     return posts_db
 
