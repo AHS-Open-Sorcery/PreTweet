@@ -9,10 +9,6 @@ import email.message
 server = smtplib.SMTP('smtp.gmail.com:587')
 
 def send_email(sender, reciever, potential_tweet, sender_password):
-
-	# Add the Potential Tweet Here
-	potential_tweet = "THIS IS A POTENTIAL TWEET"
-
 	email_content = "Potential Tweet: " + potential_tweet +  """
 	<html>
 	<head>
