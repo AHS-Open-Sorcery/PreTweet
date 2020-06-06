@@ -39,7 +39,7 @@ def access_posts():
 def access_accounts():
     global accounts_db
     if accounts_db is None:
-        accounts_db = establish_connection("./login/app.db")
+        accounts_db = establish_connection("./login/users.db")
 
     return accounts_db
 

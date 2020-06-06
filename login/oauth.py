@@ -1,4 +1,4 @@
-from flask import flash
+from flask import flash, redirect, url_for
 from flask_login import current_user, login_user, LoginManager, UserMixin
 from flask_dance.contrib.twitter import make_twitter_blueprint
 from flask_dance.consumer import oauth_authorized, oauth_error
@@ -20,6 +20,7 @@ class OAuth(OAuthConsumerMixin, db.Model):
 
 login_manager = LoginManager()
 login_manager.login_view = 'twitter.login'
+login_manager.blueprint_login_views = 'index'
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -94,3 +95,5 @@ def twitter_error(blueprint, message, response):
         response=response,
     )
     #flash(msg, category="error")
+   
+

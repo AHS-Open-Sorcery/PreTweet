@@ -14,12 +14,4 @@ db.init_app(app)
 login_manager.init_app(app)
 
 
-@app.route("/logout", methods=['GET', 'POST'])
-@login_required
-def logout():
-    logout_user()
-    flash("You have logged out")
-    return redirect(url_for("index"))
-
-
 
