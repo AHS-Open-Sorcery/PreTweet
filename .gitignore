@@ -151,3 +151,6 @@ gen
 
 # Secret Files
 *config.py
+
+# Temporary Files
+*~
