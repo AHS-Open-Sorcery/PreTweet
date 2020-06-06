@@ -3,7 +3,7 @@
     import CharacterCounter from '@smui/textfield/character-counter/index';
     import HelperText from '@smui/textfield/helper-text/index';
 
-    let draftText = '';
+    export let draftText = '';
 </script>
 
 <Textfield fullwidth textarea bind:value={draftText} label="Post Contents"

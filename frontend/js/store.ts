@@ -1,33 +1,35 @@
 import { writable, Writable } from 'svelte/store';
 
-export type ReviewStatus = {
-    status: 'NOT_STARTED'
-} | {
-    status: 'IN_PROGRESS'
-} | {
-    status: 'COMPLETE',
-    comments: string[]
-};
+export interface Review {
+    id: number;
+    reviewerId: number;
+    time: number;
+    comments: string[];
+}
 
-export type Tweet = {
+export interface Post {
     id: number,
     content: string,
-    postTime: Date,
+    time: number,
     sentiment: number,
-    canPost: boolean,
-    review: ReviewStatus
+    delay: number,
+    reviewStatus: 'NOT_STARTED' | 'PENDING' | 'COMPLETE',
+    reviews: Review[],
+    resolved: boolean
 };
 
 export type Store = {
-    tweets: Tweet[],
+    posts: Post[],
     userToken: string,
     config: {}
 };
 
 const store: Writable<Store> = writable({
-    tweets: [],
+    posts: [],
     userToken: '',
     config: {}
 });
 
 export default store;
+
+export const error: Writable<Error|undefined> = writable(undefined);
