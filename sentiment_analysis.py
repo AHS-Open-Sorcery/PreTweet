@@ -12,4 +12,10 @@ def printSentimentPolarity(text):
     # Value from -1 to 1
     print(testimonial.sentiment.polarity)
 
+"""
+# Testing code
+
 printSentimentPolarity("")
+printSentimentPolarity("like love adore")
+printSentimentPolarity("dislike hate despise")
+"""

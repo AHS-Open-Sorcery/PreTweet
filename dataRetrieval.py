@@ -54,6 +54,7 @@ def get_expired_posts(user_id):
 def get_resolved_posts(user_id):
 	return query(conn, "SELECT * FROM User_Posts WHERE resolved=1 AND userid=?", (user_id, ))
 
+
 def delete_post(post_id):
 	query(conn, "DELETE FROM User_Posts WHERE postid=?", (post_id,))
 	return
@@ -69,6 +70,7 @@ def get_post(post_id):
 	
 
 def get_post_content(post_id):
+	print (get_post(post_id))
 	return get_post(post_id)[0][1];
 
 
@@ -102,19 +104,6 @@ print(get_resolved_posts(1))
 print(get_resolved_posts(2))
 """
 
-
-
-# ACCOUNT DATA
-
-def userid_to_name(user_id):
-	return ""
-
-
-def username_to_id(username, name):
-	return 1
-
-def get_email(user_id):
-	return ""
 
 
 

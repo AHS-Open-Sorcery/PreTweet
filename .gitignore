@@ -150,5 +150,4 @@ out
 gen
 
 # Secret Files
-*.sqlite
-secrets.py
+*config.py
