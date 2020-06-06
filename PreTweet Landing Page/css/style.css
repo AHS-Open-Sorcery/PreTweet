@@ -1,0 +1,43 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.icon-block {
+  padding: 0 15px;
+}
+
+/* Background */
+.dark-sky-blue {
+  background-color: #74B3CE !important; }
+
+.steel-teal {
+  background-color: #508991 !important; }
+
+.gunmetal {
+  background-color: #172A3A !important; }
+
+.warm-black {
+  background-color: #004346 !important; }
+
+.mountain-meadow {
+  background-color: #09BC8A !important; }
+
+/* Font Colors */
+.dark-sky-blue-text {
+  color: #74B3CE !important; }
+
+.steel-teal-text {
+  color: #508991 !important; }
+
+.gunmetal-text {
+  color: #172A3A !important; }
+
+.warm-black-text {
+  color: #004346 !important; }
+
+.mountain-meadow-text {
+  color: #09BC8A !important; }
