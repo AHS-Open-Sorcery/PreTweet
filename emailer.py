@@ -73,3 +73,4 @@ def send_email(sender, reciever, potential_tweet, sender_password):
 	s.login(msg['From'], password)
 
 	s.sendmail(msg['From'], [msg['To']], msg.as_string())
+	return

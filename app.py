@@ -23,9 +23,9 @@ def index():
        	user_id = current_user.get_id()
        	add_user_post(user_id, "This is a post")
        	login_manager.login_view = 'index'
-       	return '<a href="/logout">Log out</a>'
+       	return render_template("frontend/index.html")
     else:
-        return '<a href="/login/twitter">Log in</a>'
+        return render_template("frontend/index.html")
 
 def postTweet(tweet):
     connection = sqlite3.connect("login/users.db")
