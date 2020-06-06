@@ -3,6 +3,7 @@ from sqlite3 import Error
 import datetime as dt
 from datetime import *
 import time
+import helpers
 
 
 def establish_connection(file):
@@ -53,10 +54,14 @@ def get_user_posts(user_id):
 	return posts
 
 
-def add_user_post(user_id, post):
-	timestamp = dt.datetime.now()
-	query(access_posts(), "INSERT INTO User_Posts (userid, post, timestamp, resolved, needs_review) VALUES (?, ?, ?, ?, 0)", (user_id, post, timestamp.strftime('%m-%d-%Y %H:%M:%S'), 0))
-	return
+def add_user_post(user_id, post, timestamp = None):
+	if(timestamp is None):
+		timestamp = dt.datetime.now().strftime('%m-%d-%Y %H:%M:%S')
+	else: # time is in milliseconds
+		timestamp = helpers.ms_to_time(timestamp)
+	query(access_posts(), "INSERT INTO User_Posts (userid, post, timestamp, resolved, needs_review) VALUES (?, ?, ?, ?, ?)", 
+		(user_id, post, timestamp, 0, 0))
+	return query(access_posts(), "SELECT * FROM User_Posts WHERE userid=? AND post=? AND timestamp=?", (user_id, post, timestamp))
 
 
 def get_expired_posts(user_id):
@@ -99,6 +104,10 @@ def modify_post(post_id, new_post):
 	return
 
 
+def request_post_review(post_id):
+	query(access_posts(), "UPDATE User_Posts SET needs_review=1 WHERE postid=?", (post_id, ))
+	return
+
 
 
 # ACCOUNT DATA
@@ -118,13 +127,15 @@ def get_all_users():
 
 
 
+
 # REVIEW DATA
 
 """
 status: 'NOT_STARTED'	0
-status: 'IN_PROGRESS'	1
+status: 'PENDING'		1
 status: 'COMPLETE'		2
 """
+REVIEW_STATUS_LIST = ['NOT_STARTED', 'PENDING', 'COMPLETE']
 
 def get_reviews(post_id):
 	return query(access_posts(), "SELECT * FROM Reviews WHERE postid=?", (post_id, ))
@@ -142,6 +153,33 @@ def set_review_status(review_id, status):
 	return
 
 
+
+# TO JSON
+
+def review_to_json(review_id):
+	 # there should only be one review with this id
+	data = query(access_posts(), "SELECT * FROM Reviews WHERE reviewid=?", (review_id, ))
+	review = {"id": review_id, "reviewerId": data[0][2], "time": data[0][4], "comments": data[0][3]}
+	return review
+
+
+def post_to_json(post_id):
+	 # there should only be one review with this id
+	data = query(access_posts(), "SELECT * FROM User_Posts WHERE postid=?", (post_id, ))
+	reviews = []
+	min_status = 3
+	max_status = -1
+	for review in get_reviews(post_id):
+		reviews.append(review_to_json(review[0]))
+		status = review[5]
+		min_status = min(min_status, status)
+		max_status = max(max_status, status)
+	review_status_num = min_status if min_status == max_status else 1
+
+	post = {"id": post_id, "sentiment": helpers.getSentimentPolarity(data[0][2]), 
+		"delay": ((dt.datetime.strptime(post[3], '%m-%d-%Y %H:%M:%S') + WAITING_PERIOD) - datetime.now()).total_seconds(), 
+		"resolved": data[0][4], "review_status": REVIEW_STATUS_LIST[review_status_num], "reviews": reviews}
+	return post
 
 """
 #Testing Code:

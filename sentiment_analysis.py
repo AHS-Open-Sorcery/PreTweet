@@ -6,11 +6,17 @@
 
 from textblob import TextBlob
 
-def printSentimentPolarity(text):
+
+def getSentimentPolarity(text):
     testimonial = TextBlob(text)
 
     # Value from -1 to 1
-    print(testimonial.sentiment.polarity)
+    return testimonial.sentiment.polarity
+
+
+def printSentimentPolarity(text):
+    print(getSentimentPolarity(text))
+
 
 """
 # Testing code

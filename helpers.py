@@ -3,6 +3,7 @@ import emailer
 from login.config import Config
 from sentiment_analysis import *
 import tweepy
+import json
 
 
 def send_email(user_id, post_id): # Note: can determine user_id from post_id
@@ -19,9 +20,9 @@ def notify_users():
 			send_email(user[0], post[0])
 
 
-def postTweet(tweet):
-    query(access_accounts(), "SELECT token FROM flask_dance_oauth WHERE id=?;", (current_user.get_id(), ))
-    x = json.loads(cursor.fetchone()[0])
+def postTweet(tweet, user_id, post_id):
+    tokens = query(access_accounts(), "SELECT token FROM flask_dance_oauth WHERE id=?;", (user_id, ))
+    x = json.loads(tokens[0][0])
     auth = tweepy.OAuthHandler(Config.TWITTER_OAUTH_CLIENT_KEY, Config.TWITTER_OAUTH_CLIENT_SECRET)
     auth.set_access_token(x["oauth_token"], x["oauth_token_secret"])
     api = tweepy.API(auth)
@@ -29,5 +30,10 @@ def postTweet(tweet):
     return
 
 
-#send_email(1, 3)
+def time_to_ms(time):
+	return (time-datetime.datetime(1970,1,1)).total_milliseconds()
+
+
+def ms_to_time(ms):
+	return datetime.datetime(1970,1,1) + timedelta(milliseconds=ms)
 
