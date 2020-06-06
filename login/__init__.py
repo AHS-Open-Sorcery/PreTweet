@@ -22,15 +22,4 @@ def logout():
     return redirect(url_for("index"))
 
 
-@app.route("/", methods=['GET', 'POST'])
-def index():
 
-    if not current_user.is_anonymous:
-        return '<a href="/logout">Log out</a>'
-    else:
-        return '<a href="/login/twitter">Log in</a>'
-
-    #return render_template("home.html")
-
-if __name__ == '__main__':
-    app.run(debug=True)

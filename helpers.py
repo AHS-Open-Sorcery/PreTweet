@@ -1,5 +1,5 @@
-import dataRetrieval
-import emailer
+from dataRetrieval import *
+from emailer import *
 from login.config import Config
 from sentiment_analysis import *
 
