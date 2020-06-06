@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+      "target": "es6",
+      "types": ["@pyoner/svelte-types"],
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "moduleResolution": "node"
+    },
+    "include": [
+      "js/**/*"
+    ]
+  }

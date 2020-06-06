@@ -2,21 +2,24 @@ import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import postcss from 'rollup-plugin-postcss';
+import typescript from '@rollup/plugin-typescript';
+import sveltePreprocessor from 'svelte-preprocess';
 import html2 from 'rollup-plugin-html2';
 import livereload from 'rollup-plugin-livereload';
 import serve from 'rollup-plugin-serve';
 import { terser } from 'rollup-plugin-terser';
 
-const production = !process.env.ROLLUP_WATCH;
+const production = process.env.NODE_ENV !== 'development';
 
 const plugins = [
   svelte({
     emitCss: true,
     // generate: 'ssr',
     // hydratable: true,
-    dev: !production
+    dev: !production,
+    preprocess: sveltePreprocessor()
   }),
-  // typescript(),
+  typescript(),
   resolve({
     browser: true,
     dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/')
