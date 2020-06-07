@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Post</title>
+</head>
+<body>
+    Hello professional reviewer. You have {{ posts|length }} post(s) to review.
+    <form action="/review" method="POST">
+        <table>
+            {% for post in posts %}
+            <tr>
+                <td>
+                    <input type="radio" name="post-id" id="post-select-{{ post[0] }}" value="{{ post[0] }}">
+                </td>
+                <td>
+                    "{{ post[1] }}"
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <hr>
+        <label for="comments">Your comments</label><br>
+        <textarea name="comments" id="comments" required></textarea>
+        <input type="submit" value="Submit Review">
+    </form>
+</body>
+</html>
