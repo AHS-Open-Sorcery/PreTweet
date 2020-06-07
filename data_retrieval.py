@@ -16,14 +16,6 @@ def establish_connection(file):
 	return None
 
 
-def query(connection, command, parameters):
-	cursor = connection.cursor()
-	cursor.execute(command, parameters)
-	results = cursor.fetchall()
-	cursor.close()
-	connection.commit()
-	return results
-
 posts_db = None
 accounts_db = None
 WAITING_PERIOD = timedelta(seconds=10)
@@ -45,6 +37,24 @@ def access_accounts():
     return accounts_db
 
 
+def close_connections():
+	global posts_db, accounts_db
+	if posts_db is not None:
+		posts_db.close()
+		posts_db = None
+	if accounts_db is not None:
+		accounts_db.close()
+		accounts_db = None
+
+
+def query(connection, command, parameters):
+	cursor = connection.cursor()
+	cursor.execute(command, parameters)
+	results = cursor.fetchall()
+	cursor.close()
+	connection.commit()
+	close_connections()
+	return results
 
 
 # POST DATA
