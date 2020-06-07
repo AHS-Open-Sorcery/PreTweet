@@ -9,10 +9,9 @@ import { productName } from '../js/strings';
         <Section>
             <Title>{productName}</Title>
         </Section>
-        {#if false}
         <Section align="end" toolbar>
-            <IconButton class="material-icons" aria-label="Home">home</IconButton>
+            <IconButton class="material-icons" aria-label="Log out"
+                onclick="document.location.href = '/logout';">exit_to_app</IconButton>
         </Section>
-        {/if}
     </Row>
 </TopAppBar>

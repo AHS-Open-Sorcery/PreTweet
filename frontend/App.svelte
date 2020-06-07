@@ -1,7 +1,7 @@
 <TopBar />
+<ErrorDialog />
 <div class="container">
-  <Tweet canPost postTime={new Date()}>This content is to be reviewed.</Tweet>
-  
+  <PendingTweets />
 </div>
 <DraftDialog bind:this={draftDialog}></DraftDialog>
 <Fab color="secondary" id="draft-fab" on:click={draftDialog.open}>
@@ -9,11 +9,20 @@
 </Fab>
 
 <script>
+  import { dispatch } from "./js/actions";
   import Button, {Label, Icon} from '@smui/button';
   import Tweet from './components/Tweet.svelte';
   import DraftDialog from './components/DraftDialog.svelte';
   import Fab from '@smui/fab';
   import TopBar from './components/TopBar.svelte';
+  import PendingTweets from './components/PendingTweets.svelte';
+  import ErrorDialog from './components/ErrorDialog.svelte';
 
   let draftDialog;
+
+  import { onMount } from 'svelte';
+
+  onMount(async () => {
+    dispatch('getPosts');
+  })
 </script>

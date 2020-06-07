@@ -1,7 +1,10 @@
 import { Post } from "./store";
 
 const defaultInitOptions: RequestInit = {
-    credentials: 'include'
+    credentials: 'include',
+    headers: {
+        'Content-Type': 'application/json'
+    }
 };
 
 async function jsonCheckError(response: Response): Promise<any> {
@@ -36,13 +39,13 @@ export async function addPost(content: string): Promise<Post> {
 }
 
 export async function requestReview(post: Post): Promise<void> {
-    await call('POST', '/request-review', post.id);
+    await call('POST', '/request-review', {id: post.id});
 }
 
 export async function post(post: Post): Promise<void> {
-    await call('POST', '/tweet', post.id);
+    await call('POST', '/tweet', {id: post.id});
 }
 
 export async function deletePost(post: Post): Promise<void> {
-    await call('DELETE', '/posts', post.id);
+    await call('DELETE', `/posts/${post.id}`, {});
 }

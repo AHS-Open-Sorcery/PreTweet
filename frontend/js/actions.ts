@@ -74,8 +74,8 @@ export const ACTIONS = {
 store.subscribe(val => (window as any).timeline.push(val));
 
 export function dispatch(actionName: keyof typeof ACTIONS, ...args: any[]) {
-    console.info(actionName, args);
-    const { io, transform } = ACTIONS[actionName].call(null, args) as Effect;
+    console.info(actionName, args, 'build 1');
+    const { io, transform } = ACTIONS[actionName].call(null, ...args) as Effect;
 
     if (transform != undefined) store.update(transform);
     if (io != undefined) io().catch(error.set);

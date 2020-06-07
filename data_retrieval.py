@@ -26,7 +26,7 @@ def query(connection, command, parameters):
 
 posts_db = None
 accounts_db = None
-WAITING_PERIOD = timedelta(seconds=1)
+WAITING_PERIOD = timedelta(seconds=10)
 
 
 def access_posts():
@@ -56,7 +56,7 @@ def get_user_posts(user_id):
 
 def add_user_post(user_id, post, timestamp = None):
 	if(timestamp is None):
-		timestamp = dt.datetime.now().strftime('%m-%d-%Y %H:%M:%S')
+		timestamp = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 	else: # time is in milliseconds
 		timestamp = helpers.ms_to_time(timestamp)
 	query(access_posts(), "INSERT INTO User_Posts (userid, post, timestamp, resolved, needs_review) VALUES (?, ?, ?, ?, ?)", 
@@ -68,7 +68,7 @@ def get_expired_posts(user_id):
 	posts = get_user_posts(user_id)
 	results = []
 	for post in posts:
-		if dt.datetime.strptime(post[3], '%m-%d-%Y %H:%M:%S') < (dt.datetime.now() - WAITING_PERIOD) and int(post[4])==0:
+		if dt.datetime.strptime(post[3], '%Y-%m-%d %H:%M:%S') < (dt.datetime.now() - WAITING_PERIOD) and int(post[4])==0:
 			results.append(post)
 	return results
 
@@ -144,7 +144,7 @@ def get_reviews(post_id):
 def add_review(reviewer, post_id, comment):
 	timestamp = dt.datetime.now()
 	query(access_posts(), "INSERT INTO Reviews (reviewerid, postid, comment, timestamp, status) VALUES (?, ?, ?, ?, ?)", 
-		(reviewer, post_id, comment, timestamp.strftime('%m-%d-%Y %H:%M:%S'), 0))
+		(reviewer, post_id, comment, timestamp.strftime('%Y-%m-%d %H:%M:%S'), 0))
 	return
 
 
@@ -175,10 +175,12 @@ def post_to_json(post_id):
 		min_status = min(min_status, status)
 		max_status = max(max_status, status)
 	review_status_num = min_status if min_status == max_status else 1
+	post_time = dt.datetime.strptime(data[0][3].split('.')[0] + ' UTC', '%Y-%m-%d %H:%M:%S %Z')
 
 	post = {"id": post_id, "sentiment": helpers.getSentimentPolarity(data[0][2]), 
-		"delay": ((dt.datetime.strptime(post[3], '%m-%d-%Y %H:%M:%S') + WAITING_PERIOD) - datetime.now()).total_seconds(), 
-		"resolved": data[0][4], "review_status": REVIEW_STATUS_LIST[review_status_num], "reviews": reviews}
+		"delay": WAITING_PERIOD.total_seconds(), 
+		"resolved": data[0][4], "reviewStatus": REVIEW_STATUS_LIST[review_status_num], "reviews": reviews,
+		"content": data[0][2], "time": post_time.timestamp() * 1000 }
 	return post
 
 """

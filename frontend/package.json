@@ -7,7 +7,8 @@
     "build": "rm -rf ./dist && NODE_ENV=production rollup --config",
     "serve": "rm -rf ./dist && NODE_ENV=development rollup --config --watch",
     "watch": "rollup -c rollup.config.js --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "cp dist/app.html ../templates/ && cp dist/bundle* ../static/"
   },
   "author": "Open Sorcery <github.com/AHS-Open-Sorcery>",
   "license": "Apache-2.0",
