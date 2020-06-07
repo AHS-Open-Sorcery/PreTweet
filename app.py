@@ -60,21 +60,22 @@ def request_review():
     return "{}", 200
 
 
-@app.route("/reviews", methods=['GET', 'POST'])
+@app.route("/review", methods=['GET', 'POST'])
 @login_required
 def write_review():
     if request.method == 'GET':
         pending = get_pending_posts()
         pending_posts = []
         for post in pending:
-            pending_posts.append(post[0], post[2])
+            pending_posts.append([post[0], post[2]])
         return render_template('review.html', posts=pending_posts)
     
     if request.method == 'POST':
         review_content = request.form['comments']
         post_id = request.form['post-id']
 
-        add_review(current_user.user_id(), post_id, review_content)
+        add_review(current_user.get_id(), post_id, review_content)
+        resolve_post_review(post_id)
         return redirect(url_for("index"))
 
 

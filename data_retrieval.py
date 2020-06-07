@@ -119,8 +119,13 @@ def request_post_review(post_id):
 	return
 
 
+def resolve_post_review(post_id):
+	query(access_posts(), "UPDATE User_Posts SET needs_review=0 WHERE postid=?", (post_id, ))
+	return
+
+
 def get_pending_posts():
-	return query(access_posts(), "SELECT * FROM User_Posts, WHERE needs_review=1", ())
+	return query(access_posts(), "SELECT * FROM User_Posts WHERE needs_review=1", ())
 
 
 
@@ -158,7 +163,7 @@ def get_reviews(post_id):
 def add_review(reviewer, post_id, comment):
 	timestamp = dt.datetime.now()
 	query(access_posts(), "INSERT INTO Reviews (reviewerid, postid, comment, timestamp, status) VALUES (?, ?, ?, ?, ?)", 
-		(reviewer, post_id, comment, timestamp.strftime('%Y-%m-%d %H:%M:%S'), 0))
+		(reviewer, post_id, comment, timestamp.strftime('%Y-%m-%d %H:%M:%S'), 2))
 	return
 
 
