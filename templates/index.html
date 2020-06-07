@@ -1,0 +1,148 @@
+<!--
+Title: Material Starter Template
+Author: Swarna Kishore
+Date: November 9th, 2016
+Availability: https://github.com/SwarnaKishore/MaterialStarterTemplate
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+  <title>PreTweet</title>
+
+  <!-- CSS  -->
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  <link rel="stylesheet" href="font-awesome-4.3.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <style>
+    .fa {
+      color: #ef6c00;
+    }
+  </style>
+
+  <nav class="gunmetal">
+    <div class="nav-wrapper">
+      <a href="#!" class="brand-logo">PreTweet</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <div class="section no-pad-bot warm-black white-text" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center">Welcome to PreTweet</h1>
+      <div class="row center">
+        <h5 class="header col s12 gray-text"><em>We help make sure you post the "right" tweets</em></h5>
+      </div>
+      <form method="GET" action="/login/twitter" onsubmit="onSubmit()" id="loginForm">
+        <div class="row center">
+          <div class="col s12 m6 input-field">
+            <input type="email" id="email" class="validate white-text" required>
+            <label for="email">Email</label>
+          </div>
+          <div class="col s12 m6">
+            <button href="#" class="btn-large waves-effect waves-light mountain-meadow" id="signIn">
+              <i class="material-icons left">login</i>
+              Sign In With Twitter
+            </button>
+          </div>
+        </div>
+      </form>
+      <br><br>
+
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center gunmetal-text"><i class="material-icons avatar-icon">watch_later</i></h2>
+            <h5 class="center"> Delaying a Post</h5>
+
+            <p class="center">With our 3-day delay, we make sure that you do not post something
+              rash in the "heat" of the moment
+            </p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center gunmetal-text"><i class="material-icons avatar-icon">mood</i></h2>
+            <h5 class="center">Sentiment Analysis</h5>
+
+            <p class="center"> All your Tweets will show as positive, negative, or neutral
+            </p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center gunmetal-text"><i class="material-icons avatar-icon">support_agent</i></h2>
+            <h5 class="center">Professional Review</h5>
+
+            <p class="center">You can receive feedback on your Tweet to know if it is offensive or not and to help word
+              it better
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <br><br>
+
+    <div class="section">
+
+    </div>
+  </div>
+
+  <footer class="page-footer gunmetal">
+
+
+    <div class="footer-copyright">
+      <div class="container">
+        © 2020 Open Sorcery, at Hack the Northeast
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+
+
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+
+
+  <script>
+    function onSubmit() {
+      document.cookie = 'email=' + encodeURIComponent($('#email').val());
+    }
+  </script>
+
+</body>
+
+</html>

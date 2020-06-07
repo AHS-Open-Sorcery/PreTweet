@@ -38,7 +38,7 @@ const plugins = [
     ]
   }),
   html2({
-    template: 'index.html'
+    template: 'app.html'
   })
 ];
 
@@ -51,7 +51,7 @@ if (!production) {
     livereload({ watch: './dist' })
   );
 } else {
-  plugins.push(terser({sourcemap: true}));
+  plugins.push(terser());
 }
 
 module.exports = {

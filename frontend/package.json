@@ -4,7 +4,7 @@
   "description": "Frontend for Open Sorcery's 2020 Hack the Northeast project",
   "main": "index.js",
   "scripts": {
-    "build": "rollup -c rollup.config.js",
+    "build": "rm -rf ./dist && NODE_ENV=production rollup --config",
     "serve": "rm -rf ./dist && NODE_ENV=development rollup --config --watch",
     "watch": "rollup -c rollup.config.js --watch",
     "test": "echo \"Error: no test specified\" && exit 1"

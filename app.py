@@ -19,9 +19,9 @@ def index():
     if not current_user.is_anonymous:
         
        	user_id = current_user.get_id()
-       	return '<a href="/logout">Log out</a>', 200
+       	return render_template('app.html')
     else:
-        return '<a href="/login/twitter">Log in</a>', 200
+        return render_template('index.html')
 
 @app.route("/posts", methods=['GET', 'PUT', 'DELETE'])
 @login_required
