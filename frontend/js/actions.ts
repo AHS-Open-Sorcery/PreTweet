@@ -50,8 +50,7 @@ export const ACTIONS = {
     },
     requestReview(post: Post): Effect {
         if (post.reviewStatus === 'PENDING') {
-            alert('user cannot requestReview when review is PENDING');
-            return;
+            return {};
         }
         return {
             io: async () => {
