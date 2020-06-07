@@ -13,19 +13,17 @@ To solve this issue, our team created PreTweet. When someone is the “heat of t
 
 # How we built it
 
-
-**FILL IN**
+In the process of building our application all of us ventured out and got to expand our knowledge in new languages, libraries, and frameworks. Some of the major frameworks used were Flask and Svelte. Along with Flask many other libraries such as Flask-Dance, Flask-Login, and Flask-SqlAlchemy were used in order to support and add some of our extra features like the login with Twitter, keeping track of users, and easy database entry which flask couldn’t do alone. For the front end framework we made use of Svelte and the rest of the front end was mostly written in HTML, CSS, javascript, and typescript. For the sentiment analysis we used textblob which helped us analyze a positive or negative sentiment of the text for each post and to send emails we used the Python libraries of email and smtplib, and finally in order to send tweets we used tweepy which made it easy for us to interface with the Twitter API and tweet out our users' posts.
 
 
 # Challenges we ran into
 
+One of the major challenges that we faced was virtual collaboration. Being far away from each other meant that we could not as readily communicate with our teammates or as easily share code. Another problem that this presented was that there were more potential distractions that the real world which would distrupt demo recording and make calls harder to coordinate. All of this made it so that communication and coordination became even more important that they usually are for in-person hackathons.
 
-**FILL IN**
 
 # Accomplishments that we're proud of
 
-
-**FILL IN**
+As a team I think one of our greatest achievements reflecting on this past weekend would be our ability to split up work, work together, and help each other. I think that working on a hackathon remotely was started out as a challenge for us but we were quickly able to conquer it and work productively. Being able to work with different technologies and implement everything together was also a big achievement. Many of us learned many new things and stepped out of our comfort zones and were able to succeed. In that sense, this has been possibly one of our biggest achievements individually and in the larger goal of helping people make good decisions on social media.
 
 # What's next for PreTweet
 We want to help people make the right decisions on what they post to ANY social media platform. So, in the future, we plan to expand PreTweet to Facebook, Instagram, Whatsapp etc.
