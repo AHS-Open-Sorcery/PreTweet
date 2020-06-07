@@ -119,6 +119,10 @@ def request_post_review(post_id):
 	return
 
 
+def get_pending_posts():
+	return query(access_posts(), "SELECT * FROM User_Posts, WHERE needs_review=1", ())
+
+
 
 # ACCOUNT DATA
 

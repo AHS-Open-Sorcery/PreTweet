@@ -53,11 +53,30 @@ def posts_delete(id):
 @app.route("/request-review", methods=['POST'])
 @login_required
 def request_review():
-    if(request.method == 'POST'):
+    if request.method == 'POST':
         request_post_review(request.get_json()['id'])
         return "{}", 200
     
     return "{}", 200
+
+
+@app.route("/reviews", methods=['GET', 'POST'])
+@login_required
+def write_review():
+    if request.method == 'GET':
+        pending = get_pending_posts()
+        pending_posts = []
+        for post in pending:
+            pending_posts.append(post[0], post[2])
+        return render_template('review.html', posts=pending_posts)
+    
+    if request.method == 'POST':
+        review_content = request.form['comments']
+        post_id = request.form['post-id']
+
+        add_review(current_user.user_id(), post_id, review_content)
+        return redirect(url_for("index"))
+
 
 
 @app.route("/tweet", methods=['POST'])
@@ -73,4 +92,4 @@ if __name__ == '__main__':
     app.run(debug=True, threading=False)
 
 
-notify_users()
+# notify_users()
