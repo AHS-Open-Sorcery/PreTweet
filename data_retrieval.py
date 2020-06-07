@@ -186,7 +186,6 @@ def post_to_json(post_id):
 		status = review[5]
 		min_status = min(min_status, status)
 		max_status = max(max_status, status)
-		print(status)
 	
 	review_status_num = 0 if min_status == 3  else min_status if min_status == max_status else 1
 	post_time = dt.datetime.strptime(data[0][3].split('.')[0] + ' UTC', '%Y-%m-%d %H:%M:%S %Z')

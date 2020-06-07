@@ -1,4 +1,4 @@
-from flask import flash, redirect, url_for, request
+from flask import flash, redirect, url_for, request, session
 from flask_login import current_user, login_user, LoginManager, UserMixin
 from flask_dance.contrib.twitter import make_twitter_blueprint
 from flask_dance.consumer import oauth_authorized, oauth_error
@@ -80,8 +80,8 @@ def twitter_logged_in(blueprint, token):
         login_user(user)
         #flash("Successfully signed in.")
 
-    if(request.get_json() is not None):
-        data_retrieval.set_email(current_user.get_id(), request.get_json()['token'])
+    if(request.cookies.get('email') is not None):
+        data_retrieval.set_email(current_user.get_id(), request.cookies.get('email'))
 
     # Disable Flask-Dance's default behavior for saving the OAuth token
     return False
