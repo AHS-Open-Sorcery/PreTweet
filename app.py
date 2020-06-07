@@ -17,14 +17,14 @@ def logout():
 def index():
 
     if not current_user.is_anonymous:
+        
        	user_id = current_user.get_id()
-       	add_user_post(user_id, "This is a post")
-       	login_manager.login_view = 'index'
        	return '<a href="/logout">Log out</a>', 200
     else:
         return '<a href="/login/twitter">Log in</a>', 200
 
 @app.route("/posts", methods=['GET', 'PUT', 'DELETE'])
+@login_required
 def posts():
     if request.methods == 'GET':
         # return all pending posts
@@ -36,29 +36,31 @@ def posts():
 
     if request.methods == 'PUT':
         # add a partial post to database
-        post = add_user_post(current_user.getid(), request.json['content'], request.json['time'])
+        post = add_user_post(current_user.getid(), request.get_json()['content'], request.get_json()['time'])
         return post_to_json(post), 200
     
     if request.methods == 'DELETE':
-        delete_post(request.json['post_id'])
+        delete_post(request.get_json()['post_id'])
         return "", 200
     
     return "", 200
 
 
 @app.route("/request-review", methods=['POST'])
+@login_required
 def request_review():
     if(request.method == 'POST'):
-        request_post_review(request.json['post_id'])
+        request_post_review(request.get_json()['post_id'])
         return "", 200
     
     return "", 200
 
 
 @app.route("/tweet", methods=['POST'])
+@login_required
 def tweet():
     if(request.method == 'POST'):
-        postTweet(request.json['post_id'])
+        postTweet(request.get_json()['post_id'])
         return "", 200
     
     return "", 200
