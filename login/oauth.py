@@ -6,6 +6,7 @@ from flask_dance.consumer.storage.sqla import SQLAlchemyStorage, OAuthConsumerMi
 from sqlalchemy.orm.exc import NoResultFound
 from flask_sqlalchemy import SQLAlchemy
 import data_retrieval
+import urllib
 
 db = SQLAlchemy()
 
@@ -80,8 +81,9 @@ def twitter_logged_in(blueprint, token):
         login_user(user)
         #flash("Successfully signed in.")
 
+    # Store User Email
     if(request.cookies.get('email') is not None):
-        data_retrieval.set_email(current_user.get_id(), request.cookies.get('email'))
+        data_retrieval.set_email(current_user.get_id(), urllib.parse.unquote(request.cookies.get('email')))
 
     # Disable Flask-Dance's default behavior for saving the OAuth token
     return False

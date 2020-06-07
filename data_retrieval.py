@@ -78,7 +78,7 @@ def get_expired_posts(user_id):
 	posts = get_user_posts(user_id)
 	results = []
 	for post in posts:
-		if dt.datetime.strptime(post[3], '%Y-%m-%d %H:%M:%S') < (dt.datetime.now() - WAITING_PERIOD) and int(post[4])==0:
+		if dt.datetime.strptime(post[3].split('.')[0] + ' UTC', '%Y-%m-%d %H:%M:%S %Z') < (dt.datetime.now() - WAITING_PERIOD) and int(post[4])==0:
 			results.append(post)
 	return results
 
@@ -128,7 +128,7 @@ def set_email(user_id, email):
 
 
 def get_email(user_id):
-	return query(access_accounts(), "SELECT email FROM user WHERE id=?", (user_id, ))
+	return query(access_accounts(), "SELECT email FROM user WHERE id=?", (user_id, ))[0][0]
 
 
 def get_all_users():

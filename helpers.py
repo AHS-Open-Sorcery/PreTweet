@@ -7,8 +7,12 @@ import json
 
 
 def send_email(user_id, post_id): # Note: can determine user_id from post_id
-    emailer.send_email(Config.EMAIL_SENDER, get_email(user_id), get_post_content(post_id), Config.EMAIL_PASSWORD)
-    return
+    try:
+        emailer.send_email(Config.EMAIL_SENDER, get_email(user_id), get_post_content(post_id), Config.EMAIL_PASSWORD)
+    except:
+        print("Unable to send email to user {}".format(user_id))
+        pass
+
 
 
 def notify_users():
