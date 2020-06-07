@@ -1,0 +1,10 @@
+
+textblob
+tweepy
+flask
+flask_login
+flask_dance
+sqlalchemy
+flask_sqlalchemy
+oauth
+sqlquery
