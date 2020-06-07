@@ -15,6 +15,11 @@
   bottom: 1.5rem;
 }
 
+.pending-tweets {
+  display: grid;
+  gap: 10px;
+}
+
 .tweet-comments {
   transition: max-height 0.15s ease-out;
   max-height: 0;
@@ -25,4 +30,29 @@
 .tweet-comments[open="true"] {
   display: block;
   max-height: 9999px;
+}
+
+.expander {
+  transition: transform 0.2s ease-in-out;
+}
+
+.expander[expanded] {
+  transform: rotate(180deg);
+}
+
+.large-screen-only {
+  display: none;
+}
+
+.small-screen-only {
+  display: flex;
+}
+
+@media screen and (min-width: 1000px) {
+  .large-screen-only {
+    display: flex;
+  }
+  .small-screen-only {
+    display: none;
+  }
 }

@@ -27,8 +27,8 @@ $: positivityFormat = {
 };
 
 const reviewStatusFormats = {
-    'PENDING': ['hourglass_empty', 'Review Pending', 'rgba(173, 168, 0, 1)'],
-    'COMPLETE': ['done', 'Reviewed', 'rgba(0, 133, 11, 1)']
+    'PENDING': ['hourglass_empty', 'Review Pending', '#FFD54F'],
+    'COMPLETE': ['done', 'Reviewed', '#81C784']
 }
 $: reviewStatusFormat = reviewStatusFormats[post.reviewStatus];
 
@@ -92,9 +92,9 @@ let commentsVisible = false;
             </ActionIcons>
         </Actions>
         {#if post.reviewStatus === 'COMPLETE'}
-            <Separator />
-            <div style="padding: 10px;">
-            <Row>
+            <Separator style="list-style: none;" />
+            <div>
+            <Row style="padding: 10px">
                 <Section>
                     <h4 class="mdc-typography--subtitle2">REVIEWER COMMENTS</h4>
                 </Section>
@@ -105,14 +105,11 @@ let commentsVisible = false;
             </Row>
             <List nonInteractive class="tweet-comments" open={commentsVisible ? true : null}>
                 {#each post.reviews as review} 
-                    {#each review.comments as comment}
                     <Item ripple={false}>
                         <Text>
-                            {comment}
+                            {review.comments}
                         </Text>
                     </Item>
-                    {/each}
-                    <Separator />
                 {/each}
             </List>
             </div>
@@ -123,12 +120,5 @@ let commentsVisible = false;
 <style>
     div.tweet[resolved] {
         filter: brightness(85%);
-    }
-
-    .expander {
-        transition: transform 0.2s ease-in-out;
-    }
-    .expander[expanded] {
-        transform: rotate(180deg);
     }
 </style>

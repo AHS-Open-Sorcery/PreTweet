@@ -169,7 +169,8 @@ def set_review_status(review_id, status):
 def review_to_json(review_id):
 	 # there should only be one review with this id
 	data = query(access_posts(), "SELECT * FROM Reviews WHERE reviewid=?", (review_id, ))
-	review = {"id": review_id, "reviewerId": data[0][2], "time": data[0][4], "comments": data[0][3]}
+	timestamp = helpers.time_to_ms(dt.datetime.strptime(data[0][4], '%Y-%m-%d %H:%M:%S'))
+	review = {"id": review_id, "reviewerId": data[0][2], "time": timestamp, "comments": data[0][3]}
 	return review
 
 

@@ -1,12 +1,17 @@
 <TopBar />
 <ErrorDialog />
+<div class="large-screen-only" style="position: fixed; right: 1.5rem; top: 6rem;">
+  <DraftAside />
+</div>
 <div class="container">
   <PendingTweets />
 </div>
 <DraftDialog bind:this={draftDialog}></DraftDialog>
-<Fab color="secondary" id="draft-fab" on:click={draftDialog.open}>
-    <Icon class="material-icons">add</Icon>
-</Fab>
+<div class="small-screen-only">
+  <Fab color="secondary" id="draft-fab" on:click={draftDialog.open}>
+      <Icon class="material-icons">add</Icon>
+  </Fab>
+</div>
 
 <script>
   import { dispatch } from "./js/actions";
@@ -21,6 +26,7 @@
   let draftDialog;
 
   import { onMount } from 'svelte';
+import DraftAside from "./components/DraftAside.svelte";
 
   onMount(async () => {
     dispatch('getPosts');
