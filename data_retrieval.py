@@ -169,12 +169,15 @@ def post_to_json(post_id):
 	reviews = []
 	min_status = 3
 	max_status = -1
+
 	for review in get_reviews(post_id):
 		reviews.append(review_to_json(review[0]))
 		status = review[5]
 		min_status = min(min_status, status)
 		max_status = max(max_status, status)
-	review_status_num = min_status if min_status == max_status else 1
+		print(status)
+	
+	review_status_num = 0 if min_status == 3  else min_status if min_status == max_status else 1
 	post_time = dt.datetime.strptime(data[0][3].split('.')[0] + ' UTC', '%Y-%m-%d %H:%M:%S %Z')
 
 	post = {"id": post_id, "sentiment": helpers.getSentimentPolarity(data[0][2]), 
@@ -182,6 +185,7 @@ def post_to_json(post_id):
 		"resolved": data[0][4], "reviewStatus": REVIEW_STATUS_LIST[review_status_num], "reviews": reviews,
 		"content": data[0][2], "time": post_time.timestamp() * 1000 }
 	return post
+
 
 """
 #Testing Code:

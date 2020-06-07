@@ -151,9 +151,11 @@ gen
 
 # Secret Files
 *config.py
-/login/config.py
+login/config.py
 
 # Temporary Files
 *~
-*.orig
-
+<<<<<<< Updated upstream
+/login/config.py
+=======
+>>>>>>> Stashed changes

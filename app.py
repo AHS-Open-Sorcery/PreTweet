@@ -23,7 +23,7 @@ def index():
        	user_id = current_user.get_id()
        	return render_template('app.html')
     else:
-        return render_template('index.html')
+        return render_template('templates/index.html')
 
 @app.route("/posts", methods=['GET', 'PUT'])
 @login_required

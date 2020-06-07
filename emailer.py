@@ -3,7 +3,7 @@
 # Date: January 1st, 2018
 # Availability: https://code.tutsplus.com/tutorials/sending-emails-in-python-with-smtp--cms-29975
 
-from login.config import Config
+
 import smtplib
 import email.message
 server = smtplib.SMTP('smtp.gmail.com:587')
@@ -60,9 +60,9 @@ def send_email(sender, reciever, potential_tweet, sender_password):
 	msg['Subject'] = 'Do you still want to Post your Tweet?'
 
 
-	msg['From'] = Config.EMAIL_SENDER
+	msg['From'] = sender
 	msg['To'] = reciever
-	password = Config.EMAIL_PASSWORD
+	password = sender_password
 	msg.add_header('Content-Type', 'text/html')
 	msg.set_payload(email_content)
 
